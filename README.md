@@ -10,7 +10,7 @@
 - Requirements: axios, echarts
 
 ## Frontend Preview
-![image](preview/preview1.png)
+![image](preview/preview2.png)
 ![image](preview/preview.png)
 
 ## Make it better
