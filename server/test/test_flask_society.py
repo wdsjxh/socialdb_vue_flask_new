@@ -1,6 +1,6 @@
 import requests
 
-url = "http://127.0.0.1:5000/api"
+url = "http://127.0.0.1:8888/api"
 
 #测试Person
 print("Person:\n{}".format(requests.get(url+"/find/user/123").text))

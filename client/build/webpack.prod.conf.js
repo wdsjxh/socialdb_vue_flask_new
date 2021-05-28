@@ -8,8 +8,15 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-
+const GeneraterAssetPlugin = require('generate-asset-webpack-plugin')
+const serverConfig = require('../serverConfig.json')
 var env = config.build.env
+
+const createJson = function(compilation) {
+  return JSON.stringify(serverConfig)
+}
+
+
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -29,11 +36,17 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new GeneraterAssetPlugin({
+      filename: 'serverConfig.json',//输出到dist根目录下的serverConfig.json文件,名字可以按需改
+      fn: (compilation, cb) => {
+        cb(null, createJson(compilation));
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       },
-      sourceMap: false  
+      sourceMap: false
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -91,7 +104,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    
+
     new webpack.optimize.UglifyJsPlugin({
       compress: {
             warnings: false

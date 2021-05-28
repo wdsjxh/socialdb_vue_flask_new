@@ -65,8 +65,8 @@ class BigFileToMongoDB(object):
                 line = str(line).replace("\n", "")
                 line_list = line.split(SPLIT_FLAG)
                 # line_list = line.split(";")[:-1]
-                # print(line_list)
-                dic = {i: j for i, j in zip(COLUMNS, line_list)}
+                print(line_list)
+                dic = {i: int(j) for i, j in zip(COLUMNS, line_list)}
                 if not line:
                     break
                 yield dic
@@ -82,7 +82,8 @@ class BigFileToMongoDB(object):
     def insert_mongo(filepath):
         sp_gen = BigFileToMongoDB.spfile_generator(filepath)
         db = DBManager()
-        coll = db.get_collection("test_coll")
+        coll = db.get_collection("info")
+        # coll = db.get_collection("test_coll")
 
         while True:
             docs = []
@@ -127,6 +128,6 @@ def run_insert_pool(file_path):
 
 
 if __name__ == '__main__':
-    file_path = "E:\megadownload\QBang_F_8e_1105更新\总库0.txt"
+    file_path = "E:\megadownload\微博五亿2019_012.txt"
     # filename = "F:\mega_download\QBang_F_8e_1105更新\QBang_F_8e_1105更新\QBang_F_8e\总库0.txt"
     run_insert_pool(file_path)

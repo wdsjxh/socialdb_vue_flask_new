@@ -67,7 +67,8 @@
           <th width="10%">性别</th>
           <th width="10%">地址</th>
           <th width="20%">QQ</th>
-          <th width="35%">手机号</th>
+          <th width="20%">手机号</th>
+          <th width="15%">微博uid</th>
         </tr>
         </thead>
         <tbody>
@@ -77,7 +78,8 @@
           <td width="10%">{{ item.sex }}</td>
           <td width="10%">{{ item.address }}</td>
           <td width="20%">{{ item.qq }}</td>
-          <td width="35%">{{ item.phonenumber }}</td>
+          <td width="20%">{{ item.phonenumber }}</td>
+          <td width="15%">{{ item.weibo_uid }}</td>
         </tr>
         </tbody>
       </table>

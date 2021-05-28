@@ -135,9 +135,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-backend/test/test.csv
-backend/backend_env
+server/test/test.csv
+server/backend_env
 front/
 *.pdf
 plan.md
-backend/test/test.csv
+server/test/test.csv
