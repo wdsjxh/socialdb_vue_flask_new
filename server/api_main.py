@@ -5,13 +5,23 @@ api
 '''
 
 import time
+import os
 from pymongo import MongoClient
 from flask import Flask, request, jsonify, redirect, url_for
 from flask_restful import Api, Resource, reqparse
 from conf.config import MongoDBConfig
 
 app = Flask(__name__)
-client = MongoClient(MongoDBConfig.g_server_ip, MongoDBConfig.g_server_port)
+# client = MongoClient(MongoDBConfig.g_server_ip, MongoDBConfig.g_server_port)
+# db = client[MongoDBConfig.g_db_name]
+
+
+if os.environ.get('MONGODB_URI'):
+    MONGODB_URI = os.environ.get('MONGODB_URI')
+else:
+    MONGODB_URI = 'mongodb://' + MongoDBConfig.g_server_ip + ':' + str(MongoDBConfig.g_server_port)
+
+client = MongoClient(MONGODB_URI, connect=False)
 db = client[MongoDBConfig.g_db_name]
 
 
@@ -315,6 +325,7 @@ api.add_resource(Info, "/api/info/qq/<int:qq>", endpoint="qq")
 api.add_resource(Info, "/api/info/phonenumber/<int:phonenumber>", endpoint="phonenumber")
 api.add_resource(Analysis, "/api/analysis/<string:type_analyze>", endpoint="type_analyze")
 api.add_resource(Getselector, "/api/get_selector")
-
+#
+# app.debug = False
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=False)
