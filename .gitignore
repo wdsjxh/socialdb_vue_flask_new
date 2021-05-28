@@ -141,3 +141,11 @@ front/
 *.pdf
 plan.md
 server/test/test.csv
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
